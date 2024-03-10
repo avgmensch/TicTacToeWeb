@@ -1,0 +1,19 @@
+{
+  "name": "tictactoeweb",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "fmt": "prettier . --write",
+    "style": "tailwindcss --minify --watch -i source/tailwind.css -o dist/tailwind-out.css",
+    "script": "tsc --watch",
+    "dev": "concurrently -k \"bun run script\" \"bun run style\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.12",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.4.2"
+  }
+}
