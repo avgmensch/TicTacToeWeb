@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" defer src="./dist/frontend.js"></script>
+    <script type="module" defer src="./dist/frontend.mjs"></script>
     <link rel="stylesheet" href="./dist/tailwind-out.css" />
     <title>Document</title>
   </head>
@@ -11,8 +11,8 @@
     <main class="flex h-screen w-screen items-center justify-center">
       <div class="text-center">
         <div id="tttStartMenu" class="mb-2 flex w-full justify-between">
-          <button type="button">I start</button>
-          <button type="button">Bot starts</button>
+          <button type="button" id="btnPlayerStarts">I start</button>
+          <button type="button" id="btnBotStarts">Bot starts</button>
         </div>
         <div id="tttGrid" class="mb-2 grid grid-cols-3 gap-2">
           <button type="button"></button>
@@ -26,15 +26,13 @@
           <button type="button"></button>
         </div>
         <div id="tttResetMenu">
-          <button type="button">Reset</button>
+          <button type="button" id="btnReset">Reset</button>
         </div>
       </div>
     </main>
     <footer class="absolute bottom-0 mb-3 w-screen text-center">
       Made with <span class="text-red-600">&hearts;</span> by
-      <a href="https://github.com/avgmensch" target="_blank" rel="noopener noreferrer">
-        AverageMensch
-      </a>
+      <a href="https://github.com/avgmensch" target="_blank" rel="noopener noreferrer"> AverageMensch </a>
       |
       <a href="https://github.com/avgmensch/TicTacToeWeb" target="_blank" rel="noopener noreferrer">
         Source Code

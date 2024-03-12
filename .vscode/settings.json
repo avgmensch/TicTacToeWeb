@@ -1,11 +1,11 @@
 {
   "[html]": {
     "editor.tabSize": 2,
-    "editor.rulers": [100]
+    "editor.rulers": [110]
   },
   "[typescript]": {
     "editor.tabSize": 2,
-    "editor.rulers": [100]
+    "editor.rulers": [110]
   },
   "css.lint.unknownAtRules": "ignore",
   "cSpell.words": ["tailwindcss", "tictactoeweb", "tsbuildinfo"]

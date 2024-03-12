@@ -3,5 +3,5 @@ export default {
   plugins: ["prettier-plugin-tailwindcss"],
   tailwindConfig: "./tailwind.config.js",
   tabWidth: 2,
-  printWidth: 100,
+  printWidth: 110,
 };
