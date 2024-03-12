@@ -26,7 +26,7 @@ export function isMoveRemaining(board: Board): boolean {
 export function checkForWinner(b: Board): Tile | null {
   for (let yx = 0; yx < 3; yx++) {
     if (b[yx][0] != EMPTY && b[yx][0] == b[yx][1] && b[yx][0] == b[yx][2]) return b[yx][0];
-    if (b[0][yx] != EMPTY && b[0][yx] == b[1][yx] && b[0][yx] == b[yx][2]) return b[0][yx];
+    if (b[0][yx] != EMPTY && b[0][yx] == b[1][yx] && b[0][yx] == b[2][yx]) return b[0][yx];
   }
 
   if (

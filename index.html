@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" defer src="./dist/frontend.mjs"></script>
     <link rel="stylesheet" href="./dist/tailwind-out.css" />
-    <title>Document</title>
+    <title>TicTacToe</title>
   </head>
   <body class="dark:bg-slate-900">
     <main class="flex h-screen w-screen items-center justify-center">
       <div class="text-center">
         <div id="tttStartMenu" class="mb-2 flex w-full justify-between">
-          <button type="button" id="btnPlayerStarts">I start</button>
+          <button type="button" id="btnPlayerStarts" title="This redirects to an external website.">
+            I start
+          </button>
           <button type="button" id="btnBotStarts">Bot starts</button>
         </div>
         <div id="tttGrid" class="mb-2 grid grid-cols-3 gap-2">

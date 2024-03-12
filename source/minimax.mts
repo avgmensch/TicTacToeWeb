@@ -1,10 +1,16 @@
 import { checkForWinner } from "./board_fnc.mjs";
 import { BOT, Board, EMPTY, PLAYER } from "./constants.mjs";
 
+export const fieldWorth = [
+  [3, 2, 3],
+  [2, 4, 2],
+  [3, 2, 3],
+];
+
 export function getRemainingMoves(board: Board): [number, number][] {
   const remainingMoves: [number, number][] = [];
   for (let y = 0; y < 3; y++) {
-    for (let x = 0; x < 3; y++) {
+    for (let x = 0; x < 3; x++) {
       if (board[y][x] == EMPTY) {
         remainingMoves.push([x, y]);
       }
@@ -47,7 +53,7 @@ export function getBestBotMove(board: Board): [number, number] {
     board[y][x] = BOT;
     const score = minimax(board, false);
     board[y][x] = EMPTY;
-    if (score > bestScore) {
+    if (score > bestScore || (score == bestScore && fieldWorth[y][x] > fieldWorth[bestY][bestX])) {
       bestScore = score;
       bestX = x;
       bestY = y;
