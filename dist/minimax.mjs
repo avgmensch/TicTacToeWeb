@@ -46,7 +46,9 @@ export function getBestBotMove(board) {
         board[y][x] = BOT;
         const score = minimax(board, false);
         board[y][x] = EMPTY;
-        if (score > bestScore || (score == bestScore && fieldWorth[y][x] > fieldWorth[bestY][bestX])) {
+        if (score > bestScore ||
+            (score == bestScore && fieldWorth[y][x] > fieldWorth[bestY][bestX]) ||
+            (score == bestScore && fieldWorth[y][x] == fieldWorth[bestY][bestX] && Math.random() < 0.5)) {
             bestScore = score;
             bestX = x;
             bestY = y;
