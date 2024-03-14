@@ -30,7 +30,7 @@ async function botTurn() {
 }
 btnPlayerStarts.onclick = (e) => {
     e.preventDefault();
-    alert("I taught, I would need that button, but I didn't.");
+    alert("I taught, I would need that button, but I didn't. Just click!");
 };
 btnBotStarts.onclick = async (e) => {
     e.preventDefault();

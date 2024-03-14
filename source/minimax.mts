@@ -1,12 +1,7 @@
 import { getTicTacToeWinner } from "./board_fnc.mjs";
-import { BOT, Board, EMPTY, PLAYER } from "./constants.mjs";
+import { BOT, Board, EMPTY, PLAYER, fieldWorth } from "./constants.mjs";
 
-export const fieldWorth = [
-  [3, 2, 3],
-  [2, 4, 2],
-  [3, 2, 3],
-];
-
+/** Get `x/y` values of all available moves on `board`. */
 export function getAvailableMoves(board: Board): [number, number][] {
   const remainingMoves: [number, number][] = [];
   for (let y = 0; y < 3; y++) {
@@ -19,6 +14,11 @@ export function getAvailableMoves(board: Board): [number, number][] {
   return remainingMoves;
 }
 
+/**
+ * Get the best score that can be reached for the given board configuration.
+ * If `isBot` it is the computers turn, else its the players turn. `depth`
+ * is for recursion, don't set it yourself.
+ */
 export function minimax(board: Board, isBot: boolean, depth: number = 0): number {
   // Check if the game is over (base case)
   const winner = getTicTacToeWinner(board);
@@ -42,7 +42,7 @@ export function minimax(board: Board, isBot: boolean, depth: number = 0): number
   for (const [x, y] of availableMoves) {
     // Simulate a turn (player or bot)
     board[y][x] = isBot ? BOT : PLAYER;
-    // Get score for simulated turn 
+    // Get score for simulated turn
     const score = minimax(board, !isBot, depth + 1);
     // If score is better, update bestScore
     if ((isBot && score > bestScore) || (!isBot && score < bestScore)) bestScore = score;
@@ -54,6 +54,7 @@ export function minimax(board: Board, isBot: boolean, depth: number = 0): number
   return bestScore;
 }
 
+/** Get the best move (`x/y`) for the computer from the current board configuration. */
 export function getBestBotMove(board: Board): [number, number] {
   // Define variables required for rating
   const availableMoves = getAvailableMoves(board);

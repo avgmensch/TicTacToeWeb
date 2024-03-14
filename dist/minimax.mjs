@@ -1,10 +1,5 @@
 import { getTicTacToeWinner } from "./board_fnc.mjs";
-import { BOT, EMPTY, PLAYER } from "./constants.mjs";
-export const fieldWorth = [
-    [3, 2, 3],
-    [2, 4, 2],
-    [3, 2, 3],
-];
+import { BOT, EMPTY, PLAYER, fieldWorth } from "./constants.mjs";
 export function getAvailableMoves(board) {
     const remainingMoves = [];
     for (let y = 0; y < 3; y++) {

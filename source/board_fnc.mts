@@ -1,5 +1,6 @@
 import { Board, EMPTY, Tile } from "./constants.mjs";
 
+/** Generate `Board` with all values set to `s`. Defaults to `EMPTY`. */
 export function generateBoard(s: Tile = EMPTY): Board {
   return [
     [s, s, s],
@@ -8,6 +9,7 @@ export function generateBoard(s: Tile = EMPTY): Board {
   ];
 }
 
+/** Return `true` if at least one `Tile` in `board` is equal to `EMPTY`, else `false`. */
 export function isMoveRemaining(board: Board): boolean {
   for (let y = 0; y < 3; y++) {
     for (let x = 0; x < 3; x++) {
@@ -19,6 +21,15 @@ export function isMoveRemaining(board: Board): boolean {
   return false;
 }
 
+/**
+ * Check for a winner on the TicTacToe-board `b`.
+ * - `BOT` if the computer wins.
+ * - `PLAYER` if the player wins.
+ * - `EMPTY` if it's a tie.
+ * - `null` if the game is not over.
+ * @param b `Board` to check the winner.
+ * @returns Code of the winner. See list above.
+ */
 export function getTicTacToeWinner(b: Board): Tile | null {
   // Check horizontal and diagonal
   for (let yx = 0; yx < 3; yx++) {
