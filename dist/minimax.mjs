@@ -1,11 +1,11 @@
-import { checkForWinner } from "./board_fnc.mjs";
+import { getTicTacToeWinner } from "./board_fnc.mjs";
 import { BOT, EMPTY, PLAYER } from "./constants.mjs";
 export const fieldWorth = [
     [3, 2, 3],
     [2, 4, 2],
     [3, 2, 3],
 ];
-export function getRemainingMoves(board) {
+export function getAvailableMoves(board) {
     const remainingMoves = [];
     for (let y = 0; y < 3; y++) {
         for (let x = 0; x < 3; x++) {
@@ -17,7 +17,7 @@ export function getRemainingMoves(board) {
     return remainingMoves;
 }
 export function minimax(board, isBot, depth = 0) {
-    const winner = checkForWinner(board);
+    const winner = getTicTacToeWinner(board);
     switch (winner) {
         case BOT:
             return 10 - depth;
@@ -26,7 +26,7 @@ export function minimax(board, isBot, depth = 0) {
         case EMPTY:
             return 0;
     }
-    const availableMoves = getRemainingMoves(board);
+    const availableMoves = getAvailableMoves(board);
     let bestScore = isBot ? -99 : 99;
     for (const [x, y] of availableMoves) {
         board[y][x] = isBot ? BOT : PLAYER;
@@ -38,7 +38,7 @@ export function minimax(board, isBot, depth = 0) {
     return bestScore;
 }
 export function getBestBotMove(board) {
-    const availableMoves = getRemainingMoves(board);
+    const availableMoves = getAvailableMoves(board);
     let bestScore = -99;
     let bestX = 0;
     let bestY = 0;

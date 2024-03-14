@@ -6,9 +6,6 @@ export function generateBoard(s = EMPTY) {
         [s, s, s],
     ];
 }
-export function board2dTo1d(b2d) {
-    return [b2d[0][0], b2d[0][1], b2d[0][2], b2d[1][0], b2d[1][1], b2d[1][2], b2d[2][0], b2d[2][1], b2d[2][2]];
-}
 export function isMoveRemaining(board) {
     for (let y = 0; y < 3; y++) {
         for (let x = 0; x < 3; x++) {
@@ -19,7 +16,7 @@ export function isMoveRemaining(board) {
     }
     return false;
 }
-export function checkForWinner(b) {
+export function getTicTacToeWinner(b) {
     for (let yx = 0; yx < 3; yx++) {
         if (b[yx][0] != EMPTY && b[yx][0] == b[yx][1] && b[yx][0] == b[yx][2])
             return b[yx][0];

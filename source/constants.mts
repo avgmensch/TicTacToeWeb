@@ -5,4 +5,3 @@ export const EMPTY = " ";
 export type Turn = typeof PLAYER | typeof BOT;
 export type Tile = Turn | typeof EMPTY;
 export type Board = [[Tile, Tile, Tile], [Tile, Tile, Tile], [Tile, Tile, Tile]];
-export type Board1D = [Tile, Tile, Tile, Tile, Tile, Tile, Tile, Tile, Tile];
