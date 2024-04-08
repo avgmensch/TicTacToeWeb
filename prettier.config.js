@@ -4,4 +4,5 @@ export default {
   tailwindConfig: "./tailwind.config.js",
   tabWidth: 2,
   printWidth: 110,
+  endOfLine: "auto",
 };

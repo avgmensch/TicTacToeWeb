@@ -7,7 +7,7 @@
     "fmt": "prettier . --write",
     "style": "tailwindcss --minify --watch -i source/tailwind.css -o dist/tailwind-out.css",
     "script": "tsc --watch",
-    "dev": "concurrently -k \"bun run script\" \"bun run style\""
+    "dev": "concurrently -k \"npm run script\" \"npm run style\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
