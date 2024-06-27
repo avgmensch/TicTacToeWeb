@@ -16,8 +16,10 @@ let gameIsOver: boolean = false;
 // Get DOM-elements and wrappers
 // ==========================
 
-/** HTML-element of the "I start" button. */
-const btnPlayerStarts = document.getElementById("btnPlayerStarts")! as HTMLButtonElement;
+/** HTML-element to show how the winner of the last game is. Is hidden by default. */
+const textWinnerDisplay = document.getElementById("textWinnerDisplay") as HTMLParagraphElement;
+const textWinnerDisplayShow = "display: block;";
+const textWinnerDisplayHide = "display: none;";
 
 /** HTML-element of the "Bot starts" button. */
 const btnBotStarts = document.getElementById("btnBotStarts")! as HTMLButtonElement;
@@ -49,6 +51,23 @@ function setTile(s: Turn, x: number, y: number) {
   if (tttTilesBe[y][x] == EMPTY) tttTilesBe[y][x] = s;
 }
 
+/** Display `winner` as content of `textWinnerDisplay`. Is `winner` is `null` nothing happens. */
+function announceWinner(winner: ReturnType<typeof getTicTacToeWinner>) {
+  if (winner == null) return;
+  switch (winner) {
+    case BOT:
+      textWinnerDisplay.innerHTML = "The Bot Won...";
+      break;
+    case PLAYER:
+      textWinnerDisplay.innerHTML = "You won ...<br/>Tell me how!";
+      break;
+    case EMPTY:
+      textWinnerDisplay.innerHTML = "It's a tie...";
+      break;
+  }
+  textWinnerDisplay.setAttribute("style", textWinnerDisplayShow);
+}
+
 /** Await a `Promise`, that resolved after `ms` milliseconds. */
 async function sleep(ms: number) {
   // Creates a new promise with a resolve function, that calls setTimeout.
@@ -74,13 +93,6 @@ async function botTurn() {
 // Setup game
 // ==========================
 
-// When the "I start" button is clicked,
-// say that is button does not do anything.
-btnPlayerStarts.onclick = (e) => {
-  e.preventDefault();
-  alert("I taught, I would need that button, but I didn't. Just click!");
-};
-
 // When the "Bot start" button is clicked, reset the
 // board and make the bot do the first turn.
 btnBotStarts.onclick = async (e) => {
@@ -103,6 +115,9 @@ btnReset.onclick = (e) => {
   e.preventDefault();
   // Don't interfere with minimax
   if (!playerCanAct) return;
+  // Reset winner announcement
+  textWinnerDisplay.innerHTML = "";
+  textWinnerDisplay.setAttribute("style", textWinnerDisplayHide);
   // Reset variables and render changes
   tttTilesBe = generateBoard();
   playerCanAct = true;
@@ -134,7 +149,7 @@ for (let y = 0; y < 3; y++) {
       // The player won somehow -> exit
       winner = getTicTacToeWinner(tttTilesBe);
       if (winner == PLAYER) {
-        alert("You won (somehow...)");
+        announceWinner(PLAYER);
         gameIsOver = true;
         return;
       }
@@ -148,8 +163,8 @@ for (let y = 0; y < 3; y++) {
 
       // Check if the bot has won
       winner = getTicTacToeWinner(tttTilesBe);
-      if (winner == BOT) alert("The computer wins!");
-      else if (winner == EMPTY) alert("It's a tie...");
+      if (winner == BOT) announceWinner(BOT);
+      else if (winner == EMPTY) announceWinner(EMPTY);
       gameIsOver = winner != null;
 
       // Allow actions from player

@@ -10,10 +10,7 @@
   <body class="dark:bg-slate-900">
     <main class="flex h-screen w-screen items-center justify-center">
       <div class="text-center">
-        <div id="tttStartMenu" class="mb-2 flex w-full justify-between">
-          <button type="button" id="btnPlayerStarts">I start</button>
-          <button type="button" id="btnBotStarts">Bot starts</button>
-        </div>
+        <p id="textWinnerDisplay" class="mb-1 text-xl" style="display: none"></p>
         <div id="tttGrid" class="mb-2 grid grid-cols-3 gap-2">
           <button type="button"></button>
           <button type="button"></button>
@@ -25,7 +22,8 @@
           <button type="button"></button>
           <button type="button"></button>
         </div>
-        <div id="tttResetMenu">
+        <div id="tttMenu">
+          <button type="button" id="btnBotStarts">Bot starts</button>
           <button type="button" id="btnReset">Reset</button>
         </div>
       </div>

@@ -3,7 +3,9 @@ import { BOT, EMPTY, PLAYER } from "./constants.mjs";
 import { getBestBotMove } from "./minimax.mjs";
 let playerCanAct = true;
 let gameIsOver = false;
-const btnPlayerStarts = document.getElementById("btnPlayerStarts");
+const textWinnerDisplay = document.getElementById("textWinnerDisplay");
+const textWinnerDisplayShow = "display: block;";
+const textWinnerDisplayHide = "display: none;";
 const btnBotStarts = document.getElementById("btnBotStarts");
 const btnReset = document.getElementById("btnReset");
 const tttTilesFe = document.getElementById("tttGrid").children;
@@ -19,6 +21,22 @@ function setTile(s, x, y) {
     if (tttTilesBe[y][x] == EMPTY)
         tttTilesBe[y][x] = s;
 }
+function announceWinner(winner) {
+    if (winner == null)
+        return;
+    switch (winner) {
+        case BOT:
+            textWinnerDisplay.innerHTML = "The Bot Won...";
+            break;
+        case PLAYER:
+            textWinnerDisplay.innerHTML = "You won ...<br/>Tell me how!";
+            break;
+        case EMPTY:
+            textWinnerDisplay.innerHTML = "It's a tie...";
+            break;
+    }
+    textWinnerDisplay.setAttribute("style", textWinnerDisplayShow);
+}
 async function sleep(ms) {
     await new Promise((r) => setTimeout(r, ms));
 }
@@ -28,10 +46,6 @@ async function botTurn() {
     await sleep(250);
     renderBoard();
 }
-btnPlayerStarts.onclick = (e) => {
-    e.preventDefault();
-    alert("I taught, I would need that button, but I didn't. Just click!");
-};
 btnBotStarts.onclick = async (e) => {
     e.preventDefault();
     gameIsOver = false;
@@ -45,6 +59,8 @@ btnReset.onclick = (e) => {
     e.preventDefault();
     if (!playerCanAct)
         return;
+    textWinnerDisplay.innerHTML = "";
+    textWinnerDisplay.setAttribute("style", textWinnerDisplayHide);
     tttTilesBe = generateBoard();
     playerCanAct = true;
     gameIsOver = false;
@@ -67,7 +83,7 @@ for (let y = 0; y < 3; y++) {
             }
             winner = getTicTacToeWinner(tttTilesBe);
             if (winner == PLAYER) {
-                alert("You won (somehow...)");
+                announceWinner(PLAYER);
                 gameIsOver = true;
                 return;
             }
@@ -75,9 +91,9 @@ for (let y = 0; y < 3; y++) {
             await botTurn();
             winner = getTicTacToeWinner(tttTilesBe);
             if (winner == BOT)
-                alert("The computer wins!");
+                announceWinner(BOT);
             else if (winner == EMPTY)
-                alert("It's a tie...");
+                announceWinner(EMPTY);
             gameIsOver = winner != null;
             playerCanAct = true;
         };
