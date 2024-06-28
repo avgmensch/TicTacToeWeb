@@ -37,6 +37,10 @@ function announceWinner(winner) {
     }
     textWinnerDisplay.setAttribute("style", textWinnerDisplayShow);
 }
+function clearWinnerAnnouncement() {
+    textWinnerDisplay.innerHTML = "";
+    textWinnerDisplay.setAttribute("style", textWinnerDisplayHide);
+}
 async function sleep(ms) {
     await new Promise((r) => setTimeout(r, ms));
 }
@@ -48,10 +52,11 @@ async function botTurn() {
 }
 btnBotStarts.onclick = async (e) => {
     e.preventDefault();
+    if (!playerCanAct)
+        return;
+    btnReset.onclick(e);
     gameIsOver = false;
     playerCanAct = false;
-    tttTilesBe = generateBoard();
-    renderBoard();
     await botTurn();
     playerCanAct = true;
 };
@@ -59,10 +64,8 @@ btnReset.onclick = (e) => {
     e.preventDefault();
     if (!playerCanAct)
         return;
-    textWinnerDisplay.innerHTML = "";
-    textWinnerDisplay.setAttribute("style", textWinnerDisplayHide);
+    clearWinnerAnnouncement();
     tttTilesBe = generateBoard();
-    playerCanAct = true;
     gameIsOver = false;
     renderBoard();
 };

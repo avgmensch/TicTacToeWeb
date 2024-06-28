@@ -68,6 +68,12 @@ function announceWinner(winner: ReturnType<typeof getTicTacToeWinner>) {
   textWinnerDisplay.setAttribute("style", textWinnerDisplayShow);
 }
 
+/** Set the content of `textWinnerDisplay` to `""` and hide the element. */
+function clearWinnerAnnouncement() {
+  textWinnerDisplay.innerHTML = "";
+  textWinnerDisplay.setAttribute("style", textWinnerDisplayHide);
+}
+
 /** Await a `Promise`, that resolved after `ms` milliseconds. */
 async function sleep(ms: number) {
   // Creates a new promise with a resolve function, that calls setTimeout.
@@ -97,13 +103,13 @@ async function botTurn() {
 // board and make the bot do the first turn.
 btnBotStarts.onclick = async (e) => {
   e.preventDefault();
-  // Lock actions
+  // Don't interfere with minimax
+  if (!playerCanAct) return;
+  // General reset of game data
+  btnReset.onclick!(e);
+  // Bot acts
   gameIsOver = false;
   playerCanAct = false;
-  // Reset game
-  tttTilesBe = generateBoard();
-  renderBoard();
-  // Bot acts
   await botTurn();
   // Allow player actions
   playerCanAct = true;
@@ -115,12 +121,9 @@ btnReset.onclick = (e) => {
   e.preventDefault();
   // Don't interfere with minimax
   if (!playerCanAct) return;
-  // Reset winner announcement
-  textWinnerDisplay.innerHTML = "";
-  textWinnerDisplay.setAttribute("style", textWinnerDisplayHide);
   // Reset variables and render changes
+  clearWinnerAnnouncement();
   tttTilesBe = generateBoard();
-  playerCanAct = true;
   gameIsOver = false;
   renderBoard();
 };
